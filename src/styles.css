@@ -1,0 +1,58 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body {
+    background-color:#111;
+    max-width:90vw;
+    margin:auto;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.navigation {
+
+}
+
+.inner-navigation {
+    padding-top:2rem;
+    font-size:1.1rem;
+    font-weight:bolder;
+}
+
+li {
+    list-style:none;
+}
+
+.games {
+    column-count:4;
+}
+
+h1 {
+    column-count:1;
+    width:100%;
+    padding:2rem 0;
+    font-size:2.5rem;
+}
+
+.card {
+    max-width:17rem;
+    background:#222;
+    border-radius:.7rem;
+    margin-bottom:1rem;
+    break-inside:avoid-column;
+    break-before: auto;
+}
+
+.game-image {
+    width:100%;
+    height:auto;
+    border-radius:.7rem;
+}
+
+.game-title {
+    padding:1.5rem 1.2rem;
+    font-size:1.5rem;
+}
