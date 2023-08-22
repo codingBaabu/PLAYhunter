@@ -1,19 +1,13 @@
 import getGames from './rawgCall.js'
+import { initColcade, getSmallestColumn } from './masonry.js'
+
+window.addEventListener('scroll', addGames)
+document.addEventListener('DOMContentLoaded', initColcade)
 
 let currentPage=1
 let colcade
 
-window.addEventListener('scroll', addMoreGames)
-
-document.addEventListener('DOMContentLoaded', function () {
-    var grid = document.querySelector('.games'); 
-    colcade = new Colcade(grid, {
-        columns: '.grid-col',
-        items: '.card'
-  });
-})
-
-function addMoreGames(){
+function addGames(){
     if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight){
         const svg = document.getElementById('linear')
         svg.style.visibility = 'visible'
@@ -37,27 +31,12 @@ async function renderGames(params, cPage){
             block.appendChild(getGameImageHTML(game))
             block.appendChild(getGameTitleHTML(game))
 
-            let smallestColumn = getSmallestColumn()
-            smallestColumn.appendChild(block)
+            getSmallestColumn().appendChild(block)
     })
 
     document.getElementById('linear').style.visibility = 'hidden'
     document.getElementById('spinner').style.visibility = 'hidden'
     document.querySelector('.loading-initial-content').style.display = 'none'
-}
-
-function getSmallestColumn(){
-    let columns = document.querySelectorAll('.grid-col')
-    let smallestColumn = columns[0]
-
-    columns.forEach(column=>{
-        if(column.offsetHeight < smallestColumn.offsetHeight){
-            smallestColumn = column           
-        }
-    })
-
-
-    return smallestColumn
 }
 
 function getGameImageHTML(game){
@@ -76,6 +55,4 @@ function getGameTitleHTML(game){
     return gameTitle
 }
 
-for(currentPage ; currentPage < 4 ; currentPage++){
-    renderGames(`ordering=released&page=${currentPage}`, currentPage)
-}
+addGames()

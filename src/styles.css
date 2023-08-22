@@ -13,10 +13,6 @@ body {
     height:75vh;
 }
 
-.navigation {
-
-}
-
 .inner-navigation {
     padding-top:2rem;
     font-size:1.1rem;
@@ -41,8 +37,6 @@ li {
     width:10rem;
     height:min-content;
 }
-
-
 
 h1 {
     width:100%;
