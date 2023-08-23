@@ -9,10 +9,25 @@ document.addEventListener('DOMContentLoaded', initColcade)
 let currentPage=0
 let currentOrder='released'
 
-function addGames(){
+function startLoading(){
+    if(!document.querySelector('.grid-col--1').textContent){
+        document.getElementById('spinner').style.visibility = 'visible'
+        document.querySelector('.loading-initial-content').style.display = 'flex'
+    } else {
+        document.getElementById('linear').style.visibility = 'visible'
+        document.querySelector('.loading-more-content').style.display = 'flex'       
+    }
+}
+
+function stopLoading(){
+    document.getElementById('linear').style.visibility = 'hidden'
+    document.getElementById('spinner').style.visibility = 'hidden'
+    document.querySelector('.loading-initial-content').style.display = 'none'
+}
+
+function addGames(pass=false){
     if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight){
-        document.getElementById('linear').svg.style.visibility = 'visible'
-        document.querySelector('.loading-more-content').style.display = 'flex'        
+        startLoading()    
         renderGames(`ordering=${currentOrder}&page=${++currentPage}&page_size=100`)
     }
 }
@@ -30,10 +45,7 @@ async function renderGames(params){
 
             getSmallestColumn().appendChild(block)
     })
-
-    document.getElementById('linear').style.visibility = 'hidden'
-    document.getElementById('spinner').style.visibility = 'hidden'
-    document.querySelector('.loading-initial-content').style.display = 'none'
+    stopLoading()
 }
 
 function getGameImageHTML(game){
@@ -68,4 +80,4 @@ function setOrder(e){
     }
 }
 
-addGames()
+addGames(true)
