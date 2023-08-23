@@ -1,27 +1,23 @@
 import getGames from './rawgCall.js'
 import { initColcade, getSmallestColumn } from './masonry.js'
 
+document.querySelector('.order-dropdown')
+    .addEventListener('click', setOrder)
 window.addEventListener('scroll', addGames)
 document.addEventListener('DOMContentLoaded', initColcade)
 
-let currentPage=1
-let colcade
+let currentPage=0
+let currentOrder='released'
 
 function addGames(){
     if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight){
-        const svg = document.getElementById('linear')
-        svg.style.visibility = 'visible'
-        
-        document.querySelector('.loading-more-content').style.display = 'flex'
-        
-        for(let i = currentPage ; i < currentPage + 3; i++){
-            renderGames(`ordering=released&page=${i}`, i-currentPage+1)
-        }
-        currentPage+=3
+        document.getElementById('linear').svg.style.visibility = 'visible'
+        document.querySelector('.loading-more-content').style.display = 'flex'        
+        renderGames(`ordering=${currentOrder}&page=${++currentPage}&page_size=100`)
     }
 }
 
-async function renderGames(params, cPage){
+async function renderGames(params){
     const rawGamesList = await getGames(params)
     const gamesList = rawGamesList.filter(game=>game.background_image!=null)
 
@@ -29,6 +25,7 @@ async function renderGames(params, cPage){
             let block = document.createElement('article')
             block.setAttribute('class', 'card')
             block.appendChild(getGameImageHTML(game))
+            block.appendChild(getGameRatingHTML(game)) 
             block.appendChild(getGameTitleHTML(game))
 
             getSmallestColumn().appendChild(block)
@@ -53,6 +50,22 @@ function getGameTitleHTML(game){
     gameTitle.setAttribute('class', 'game-title')
     gameTitle.textContent = game.name
     return gameTitle
+}
+
+function getGameRatingHTML(game){
+    let gameRating = document.createElement('p')
+    gameRating.setAttribute('class', 'game-rating')
+    gameRating.textContent = game.metacritic
+    return gameRating
+}
+
+function setOrder(e){
+    if(e.target.tagName=='OPTION'){
+        document.querySelectorAll('.grid-col').forEach(col=>col.innerHTML='')
+        currentPage=1
+        currentOrder=e.target.value
+        addGames()
+    }
 }
 
 addGames()

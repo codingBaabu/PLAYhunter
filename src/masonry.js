@@ -1,3 +1,5 @@
+let colcade
+
 function initColcade(){
     var grid = document.querySelector('.games'); 
     colcade = new Colcade(grid, {
