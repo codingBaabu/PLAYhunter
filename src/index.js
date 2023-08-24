@@ -1,13 +1,16 @@
 import getGames from './rawgCall.js'
 import { initColcade, getSmallestColumn } from './masonry.js'
+import sidebarInit from './sidebar.js'
 
 document.querySelector('.order-dropdown')
     .addEventListener('click', setOrder)
-window.addEventListener('scroll', addGames)
+window.addEventListener('scroll', addMoreGames)
 document.addEventListener('DOMContentLoaded', initColcade)
 
 let currentPage=0
 let currentOrder='released'
+let currentFilter=''
+const urlParams = new URLSearchParams(window.location.search)
 
 function startLoading(){
     if(!document.querySelector('.grid-col--1').textContent){
@@ -16,6 +19,7 @@ function startLoading(){
     } else {
         document.getElementById('linear').style.visibility = 'visible'
         document.querySelector('.loading-more-content').style.display = 'flex'       
+        document.querySelector('.loading-more-content').style.padding = '5rem'       
     }
 }
 
@@ -25,17 +29,33 @@ function stopLoading(){
     document.querySelector('.loading-initial-content').style.display = 'none'
 }
 
-function addGames(pass=false){
-    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight){
+function addGames(){
         startLoading()    
-        renderGames(`ordering=${currentOrder}&page=${++currentPage}&page_size=100`)
+        renderGames(getParams())
+}
+
+function getParams(){
+    const queryParams = {};
+
+    for (const [key, value] of urlParams.entries()) {
+        queryParams[key] = value;
+    }
+
+    const params = new URLSearchParams(queryParams).toString()
+
+    return `ordering=${currentOrder}&page=${++currentPage}&${currentFilter}&${params}&page_size=100`
+}
+
+function addMoreGames(filters=''){
+    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight && getIsEmptyGames()==false){
+        startLoading()    
+        renderGames(getParams())
     }
 }
 
 async function renderGames(params){
     const rawGamesList = await getGames(params)
     const gamesList = rawGamesList.filter(game=>game.background_image!=null)
-
     gamesList.forEach(game=>{
             let block = document.createElement('article')
             block.setAttribute('class', 'card')
@@ -73,11 +93,34 @@ function getGameRatingHTML(game){
 
 function setOrder(e){
     if(e.target.tagName=='OPTION'){
-        document.querySelectorAll('.grid-col').forEach(col=>col.innerHTML='')
         currentPage=1
         currentOrder=e.target.value
+        clearGames()
         addGames()
     }
 }
 
-addGames(true)
+function clearGames(){
+    document.querySelectorAll('.grid-col').forEach(col=>col.innerHTML='')
+}
+
+function getIsEmptyGames(){
+    let empty = true
+    document.querySelectorAll('.grid-col').forEach(col=>{
+        if(col.innerHTML!=''){
+            empty=false
+        }
+    })
+
+    return empty
+}
+
+function setTitle(){
+    const title = document.querySelector('.current-order-title')
+    const filter = urlParams.get('filter')
+    title.textContent=filter?filter:'ALL GAMES'
+}
+
+setTitle()
+sidebarInit()
+addGames()
