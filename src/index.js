@@ -1,52 +1,20 @@
 import getGames from './rawgCall.js'
 import { initColcade, getSmallestColumn } from './masonry.js'
 import sidebarInit from './sidebar.js'
+import { startLoading, stopLoading } from './loading.js'
+import { getParams, getURLParams, setCurrentPage, setCurrentOrder } from './queryParameters.js'
 
 document.querySelector('.order-dropdown')
-    .addEventListener('click', setOrder)
+    .addEventListener('click', orderSelected)
 window.addEventListener('scroll', addMoreGames)
 document.addEventListener('DOMContentLoaded', initColcade)
-
-let currentPage=0
-let currentOrder='released'
-let currentFilter=''
-const urlParams = new URLSearchParams(window.location.search)
-
-function startLoading(){
-    if(!document.querySelector('.grid-col--1').textContent){
-        document.getElementById('spinner').style.visibility = 'visible'
-        document.querySelector('.loading-initial-content').style.display = 'flex'
-    } else {
-        document.getElementById('linear').style.visibility = 'visible'
-        document.querySelector('.loading-more-content').style.display = 'flex'       
-        document.querySelector('.loading-more-content').style.padding = '5rem'       
-    }
-}
-
-function stopLoading(){
-    document.getElementById('linear').style.visibility = 'hidden'
-    document.getElementById('spinner').style.visibility = 'hidden'
-    document.querySelector('.loading-initial-content').style.display = 'none'
-}
 
 function addGames(){
         startLoading()    
         renderGames(getParams())
 }
 
-function getParams(){
-    const queryParams = {};
-
-    for (const [key, value] of urlParams.entries()) {
-        queryParams[key] = value;
-    }
-
-    const params = new URLSearchParams(queryParams).toString()
-
-    return `ordering=${currentOrder}&page=${++currentPage}&${currentFilter}&${params}&page_size=100`
-}
-
-function addMoreGames(filters=''){
+function addMoreGames(){
     if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight && getIsEmptyGames()==false){
         startLoading()    
         renderGames(getParams())
@@ -91,10 +59,10 @@ function getGameRatingHTML(game){
     return gameRating
 }
 
-function setOrder(e){
+function orderSelected(e){
     if(e.target.tagName=='OPTION'){
-        currentPage=1
-        currentOrder=e.target.value
+        setCurrentPage(1)
+        setCurrentOrder(e.target.value)
         clearGames()
         addGames()
     }
@@ -117,7 +85,7 @@ function getIsEmptyGames(){
 
 function setTitle(){
     const title = document.querySelector('.current-order-title')
-    const filter = urlParams.get('filter')
+    const filter = getURLParams().get('filter')
     title.textContent=filter?filter:'ALL GAMES'
 }
 
