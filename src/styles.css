@@ -82,6 +82,13 @@ h1 {
     break-before: auto;
 }
 
+.card:hover {
+    cursor:pointer;
+    border:.5rem solid #222;
+
+}
+
+
 .game-image {
     width:100%;
     height:auto;

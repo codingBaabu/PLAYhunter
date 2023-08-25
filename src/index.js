@@ -1,4 +1,4 @@
-import getGames from './rawgCall.js'
+import { getGames, getGameDetails } from './rawgCall.js'
 import { initColcade, getSmallestColumn } from './masonry.js'
 import { startLoading, stopLoading } from './DOM-Manipulation/loading.js'
 import { getParams, setCurrentPage, setCurrentOrder } from './queryParameters.js'
@@ -11,6 +11,19 @@ document.querySelector('.order-dropdown')
     .addEventListener('click', orderSelected)
 window.addEventListener('scroll', addMoreGames)
 document.addEventListener('DOMContentLoaded', initColcade)
+document.querySelector('.games').addEventListener('click', redirect)
+
+async function redirect(e){
+    const id = e.target.parentElement.dataset.id
+    if(id){
+        const details = await getGameDetails(id)
+        if(details.website){
+            window.open(details.website, '_blank')            
+        } else {
+            window.open(`https://www.google.com/search?q=${details.name} video game`, '_blank')            
+        }
+    }
+}
 
 function orderSelected(e){
     if(e.target.tagName=='OPTION'){
@@ -39,6 +52,7 @@ async function renderGames(params){
     gamesList.forEach(game=>{
             let block = document.createElement('article')
             block.setAttribute('class', 'card')
+            block.setAttribute('data-id', game.id)
             block.appendChild(getGameImageHTML(game))
             block.appendChild(getGameRatingHTML(game)) 
             block.appendChild(getGameTitleHTML(game))

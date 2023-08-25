@@ -4,4 +4,14 @@ function getGames(params){
         .then((data)=> data.rawgData)
 }
 
-export default getGames
+function getGameDetails(id){
+    return fetch(`http://localhost:5501/rawg/single-game/${id}`)
+        .then((res)=>res.json())
+        .then((data)=> data.rawgData)
+}
+
+
+export {
+    getGames,
+    getGameDetails
+}
