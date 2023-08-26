@@ -12,6 +12,7 @@ import { setTitle } from './DOM-Manipulation/title.js'
 //EventListeners
 window.addEventListener('scroll', addMoreGames)
 document.querySelector('.order-dropdown').addEventListener('change', orderSelected)
+document.querySelector('.play-hunter').addEventListener('click', removeQueries)
 document.addEventListener('DOMContentLoaded', initColcade)
 document.querySelector('.games').addEventListener('click', redirect)
 document.querySelector('.sidebar').addEventListener('click', filterSelected)
@@ -23,6 +24,10 @@ function addMoreGames(){
         startLoading()    
         renderGames(getParams())
     }
+}
+
+function removeQueries(e){
+    filterSelected(e, true)
 }
 
 function orderSelected(e){
@@ -44,14 +49,21 @@ async function redirect(e){
     }
 }
 
-function filterSelected(e){
+function filterSelected(e, exception){
     const query = e.target.dataset.query    //returns a query stored in a created object in sidebar.js e.g. genres=action&filter=Action
-    if(query){
+    if(query || exception){
         let baseURL = window.location.origin + window.location.pathname
-        let filter = query.split('&')
-        let queries = { //breaks down aforementioned query into a format usable to add query to URL as multiple parameters
-            [filter[0].split('=')[0]]:filter[0].split('=')[1],
-            [filter[1].split('=')[0]]:filter[1].split('=')[1]
+        let filter
+        let queries
+        
+        if(query){
+            filter = query.split('&')
+            queries = { //breaks down aforementioned query into a format usable to add query to URL as multiple parameters
+                [filter[0].split('=')[0]]:filter[0].split('=')[1],
+                [filter[1].split('=')[0]]:filter[1].split('=')[1]
+            }
+        } else {
+            queries = {}
         }
 
         let queryString = Object.keys(queries).map((key)=>{ 

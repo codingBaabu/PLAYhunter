@@ -19,6 +19,11 @@ body {
     color:white;
 }
 
+.play-hunter:hover {
+    cursor: pointer;
+    color:#ccc;
+}
+
 .inner-navigation {
     padding-top:2rem;
     font-size:1.1rem;
