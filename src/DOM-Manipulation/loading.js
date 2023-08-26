@@ -1,4 +1,7 @@
 
+//Appropriate loading animation is started and stopped depending on content that is loading
+//Both the svg and it's container are altered for a given loading state
+
 function startLoading(){
     disable()
     if(!document.querySelector('.grid-col--1').textContent){
@@ -18,6 +21,7 @@ function stopLoading(){
     document.querySelector('.loading-initial-content').style.display = 'none'
 }
 
+//Don't want user to click on sidebar/dropdown option if response is pending
 function disable(){
     document.querySelectorAll('.dd-option').forEach(option=>{
         option.disabled = true;
@@ -28,6 +32,7 @@ function disable(){
     })
 }
 
+//Response received. User can click on sidebar/dropdown
 function enable(){
     document.querySelectorAll('.sidebar-option').forEach(option=>{
         option.disabled = false;

@@ -1,3 +1,4 @@
+
 let colcade
 
 function initColcade(){
@@ -8,6 +9,9 @@ function initColcade(){
   });
 }
 
+//Masonry layout means uneven ends of columns. Can get ugly
+//This function Looks at height of each of four column elements
+//Lowest height? Smallest column. Best pick for a card that needs to be added
 function getSmallestColumn(){
     let columns = document.querySelectorAll('.grid-col')
     let smallestColumn = columns[0]

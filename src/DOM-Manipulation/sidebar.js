@@ -40,6 +40,7 @@ function getDateQuery(days){
     return `dates=${previousDate.getFullYear()}-${getLeadingZero(previousDate.getMonth())}-${getLeadingZero(previousDate.getDate())},${today.getFullYear()}-${getLeadingZero(today.getMonth())}-${getLeadingZero(today.getDate())}`
 }
 
+//RAWG API necessitates leading zeros for months and dates
 function getLeadingZero(date){
     return date<10?`0${date}`:date
 }

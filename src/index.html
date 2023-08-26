@@ -1,12 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Open Graph-->
+    <meta property="og:title" content="PLAYHunter - Journey the digital ocean">
+    <meta property="og:description" content="PLAYHunter is a video game discovery platform. PC, console, mobile, doesn't matter! Looking for a new game? We'll help you find it.">
+    <meta property="og:title" content="../images/og_index.jpg">
+    <meta property="og:url" content="">
+
     <title>PLAYHunter</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!--Header. .order-section and .order-dropdown are moved to appear as part of nav on smaller screens-->
     <header class="header">
         <nav class="navigation">
             <ul class="inner-navigation">
@@ -17,6 +27,7 @@
         </nav>
         <section class="order-section">
             <h1 class="current-order-title"></h1>
+            <!--Dropdown to order games-->
             <select id="order-dropdown" name="order-dropdown" class="order-dropdown" autocomplete="off" value="n">
                 <option class="dd-option" name="-released" value="-released">New Releases</option>
                 <option class="dd-option" name="released" value="released">Old Releases</option>
@@ -25,12 +36,15 @@
         </section>
     </header>
     <main class="content">
-        <article class="sidebar hidden"></article>
+            <!--Sidebar-->
+            <article class="sidebar hidden"></article>
 
+        <!--Loading icon on initial load and subsequent ordering/filtering-->
         <section class="loading-initial-content">
             <svg id="spinner" width="50" height="50" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_nOfF{animation:spinner_qtyZ 2s cubic-bezier(0.36,.6,.31,1) infinite}.spinner_fVhf{animation-delay:-.5s}.spinner_piVe{animation-delay:-1s}.spinner_MSNs{animation-delay:-1.5s}@keyframes spinner_qtyZ{0%{r:0}25%{r:3px;cx:4px}50%{r:3px;cx:12px}75%{r:3px;cx:20px}100%{r:0;cx:20px}}</style><circle class="spinner_nOfF" cx="4" cy="12" r="3"/><circle class="spinner_nOfF spinner_fVhf" cx="4" cy="12" r="3"/><circle class="spinner_nOfF spinner_piVe" cx="4" cy="12" r="3"/><circle class="spinner_nOfF spinner_MSNs" cx="4" cy="12" r="3"/></svg>
         </section>
-    
+
+        <!--Game content. grid-col classes needed by colcade for masonry layout-->
         <section class="games" id="games">
             <div class="grid-col grid-col--1"></div>
             <div class="grid-col grid-col--2"></div>
@@ -38,14 +52,11 @@
             <div class="grid-col grid-col--4"></div>
         </section>
 
-
+        <!--Loading icon when game cards exist, but more are coming-->
         <section class="loading-more-content">
             <svg id="linear" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><style>.spinner_hzlK{animation:spinner_vc4H .8s linear infinite;animation-delay:-.8s}.spinner_koGT{animation-delay:-.65s}.spinner_YF1u{animation-delay:-.5s}@keyframes spinner_vc4H{0%{y:1px;height:22px}93.75%{y:5px;height:14px;opacity:.2}}</style><rect class="spinner_hzlK" x="1" y="1" width="6" height="22"/><rect class="spinner_hzlK spinner_koGT" x="9" y="1" width="6" height="22"/><rect class="spinner_hzlK spinner_YF1u" x="17" y="1" width="6" height="22"/></svg>
         </section>
     </main>
-    <footer class="footer">
-
-    </footer>
 
     <script src="https://npmcdn.com/colcade@0/colcade.js"></script>
     <script src="index.js" type="module"></script>

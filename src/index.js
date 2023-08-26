@@ -1,3 +1,5 @@
+
+//Imports
 import { getGames, getGameDetails } from './rawgCall.js'
 import { initColcade, getSmallestColumn } from './masonry.js'
 import { startLoading, stopLoading } from './DOM-Manipulation/loading.js'
@@ -7,17 +9,27 @@ import sidebarInit from './DOM-Manipulation/sidebar.js'
 import { clearGames, getIsEmptyGames } from './DOM-Manipulation/emptyGames.js'
 import { setTitle } from './DOM-Manipulation/title.js'
 
-document.querySelector('.order-dropdown')
-    .addEventListener('change', orderSelected)
+//EventListeners
 window.addEventListener('scroll', addMoreGames)
+document.querySelector('.order-dropdown').addEventListener('change', orderSelected)
 document.addEventListener('DOMContentLoaded', initColcade)
 document.querySelector('.games').addEventListener('click', redirect)
 document.querySelector('.sidebar').addEventListener('click', filterSelected)
 document.querySelector('.current-order-title').addEventListener('click', toggleSidebar)
 
-function toggleSidebar(){
-    const sidebar = document.querySelector('.sidebar')
-    sidebar.classList.toggle('hidden')
+//EventListener functions
+function addMoreGames(){
+    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight && getIsEmptyGames()==false){
+        startLoading()    
+        renderGames(getParams())
+    }
+}
+
+function orderSelected(e){
+        setCurrentPage(1)
+        setCurrentOrder(e.target.value)
+        clearGames()
+        addGames()
 }
 
 async function redirect(e){
@@ -33,16 +45,16 @@ async function redirect(e){
 }
 
 function filterSelected(e){
-    const query = e.target.dataset.query
+    const query = e.target.dataset.query    //returns a query stored in a created object in sidebar.js e.g. genres=action&filter=Action
     if(query){
         let baseURL = window.location.origin + window.location.pathname
         let filter = query.split('&')
-        let queries = {
+        let queries = { //breaks down aforementioned query into a format usable to add query to URL as multiple parameters
             [filter[0].split('=')[0]]:filter[0].split('=')[1],
             [filter[1].split('=')[0]]:filter[1].split('=')[1]
         }
 
-        let queryString = Object.keys(queries).map((key)=>{
+        let queryString = Object.keys(queries).map((key)=>{ 
             return encodeURIComponent(key) + '=' + encodeURIComponent(queries[key])
         }).join('&')
 
@@ -56,20 +68,12 @@ function filterSelected(e){
     }
 }
 
-function orderSelected(e){
-        setCurrentPage(1)
-        setCurrentOrder(e.target.value)
-        clearGames()
-        addGames()
+function toggleSidebar(){
+    const sidebar = document.querySelector('.sidebar')
+    sidebar.classList.toggle('hidden')
 }
 
-function addMoreGames(){
-    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight && getIsEmptyGames()==false){
-        startLoading()    
-        renderGames(getParams())
-    }
-}
-
+//Functions to add games on page load and render game content as user interacts with app
 function addGames(){
     startLoading()    
     renderGames(getParams())
