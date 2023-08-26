@@ -18,12 +18,20 @@ function getGameTitleHTML(game){
 function getGameRatingHTML(game){
     let gameRating = document.createElement('p')
     gameRating.setAttribute('class', 'game-rating')
-    gameRating.textContent = game.metacritic
+    gameRating.textContent = game.metacritic==null?'-':game.metacritic
     return gameRating
+}
+
+function getGameGenresHTML(game){
+    let gameGenres = document.createElement('p')
+    gameGenres.setAttribute('class', 'game-genres')
+    gameGenres.textContent = game.genres.map(genre=>genre.name).join(', ')
+    return gameGenres
 }
 
 export {
     getGameImageHTML,
     getGameTitleHTML,
-    getGameRatingHTML
+    getGameRatingHTML,
+    getGameGenresHTML
 }
