@@ -17,10 +17,10 @@
         </nav>
         <section class="order-section">
             <h1 class="current-order-title"></h1>
-            <select class="order-dropdown" autocomplete="off">
-                <option class="dd-option" value="-released">New Releases</option>
-                <option class="dd-option" value="released">Old Releases</option>
-                <option class="dd-option" value="-metacritic">Rating</option>
+            <select id="order-dropdown" name="order-dropdown" class="order-dropdown" autocomplete="off" value="n">
+                <option class="dd-option" name="-released" value="-released">New Releases</option>
+                <option class="dd-option" name="released" value="released">Old Releases</option>
+                <option class="dd-option" name="rating" value="-metacritic">Rating</option>
             </select>
         </section>
     </header>

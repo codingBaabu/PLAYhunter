@@ -8,7 +8,7 @@ import { clearGames, getIsEmptyGames } from './DOM-Manipulation/emptyGames.js'
 import { setTitle } from './DOM-Manipulation/title.js'
 
 document.querySelector('.order-dropdown')
-    .addEventListener('click', orderSelected)
+    .addEventListener('change', orderSelected)
 window.addEventListener('scroll', addMoreGames)
 document.addEventListener('DOMContentLoaded', initColcade)
 document.querySelector('.games').addEventListener('click', redirect)
@@ -57,12 +57,10 @@ function filterSelected(e){
 }
 
 function orderSelected(e){
-    if(e.target.tagName=='OPTION'){
         setCurrentPage(1)
         setCurrentOrder(e.target.value)
         clearGames()
         addGames()
-    }
 }
 
 function addMoreGames(){
