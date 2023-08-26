@@ -13,6 +13,13 @@ window.addEventListener('scroll', addMoreGames)
 document.addEventListener('DOMContentLoaded', initColcade)
 document.querySelector('.games').addEventListener('click', redirect)
 document.querySelector('.sidebar').addEventListener('click', filterSelected)
+document.querySelector('.current-order-title').addEventListener('click', toggleSidebar)
+
+function toggleSidebar(){
+    const sidebar = document.querySelector('.sidebar')
+   
+        sidebar.classList.toggle('hidden')
+}
 
 async function redirect(e){
     const id = e.target.parentElement.dataset.id
