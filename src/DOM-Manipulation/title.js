@@ -2,9 +2,13 @@
 import { getURLParams } from '../queryParameters.js'
 
 function setTitle(){
-    const title = document.querySelector('.current-order-title')
+    const currentOrderTitle = document.querySelector('.current-order-title')
+    const title = document.getElementsByTagName('title')[0]
+    
     const filter = getURLParams().get('filter')
-    title.textContent=filter?filter:'ALL GAMES'
+    
+    currentOrderTitle.textContent=filter?filter:'ALL GAMES'
+    title.textContent=filter?filter+` | PLAYhunter`:'PLAYhunter'
 }
 
 export {
