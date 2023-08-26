@@ -4,7 +4,7 @@ import { getGames, getGameDetails } from './rawgCall.js'
 import { initColcade, getSmallestColumn } from './masonry.js'
 import { startLoading, stopLoading } from './DOM-Manipulation/loading.js'
 import { getParams, setCurrentPage, setCurrentOrder } from './queryParameters.js'
-import { getGameImageHTML, getGameTitleHTML, getGameRatingHTML, getGameGenresHTML } from './DOM-Manipulation/generateCardContent.js'
+import { getGameImageHTML, getGameTitleHTML, getGameRatingHTML, getGameGenresHTML, getGamePlatformsHTML } from './DOM-Manipulation/generateCardContent.js'
 import sidebarInit from './DOM-Manipulation/sidebar.js'
 import { clearGames, getIsEmptyGames } from './DOM-Manipulation/emptyGames.js'
 import { setTitle } from './DOM-Manipulation/title.js'
@@ -88,6 +88,7 @@ async function renderGames(params){
                 block.setAttribute('class', 'card')
                 block.setAttribute('data-id', game.id)
                 block.appendChild(getGameImageHTML(game))
+                block.appendChild(getGamePlatformsHTML(game))
                 block.appendChild(getGameRatingHTML(game)) 
                 block.appendChild(getGameTitleHTML(game))
                 block.appendChild(getGameGenresHTML(game))

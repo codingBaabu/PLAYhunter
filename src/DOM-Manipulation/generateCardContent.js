@@ -29,9 +29,18 @@ function getGameGenresHTML(game){
     return gameGenres
 }
 
+
+function getGamePlatformsHTML(game){
+    let gamePlatforms = document.createElement('p')
+    gamePlatforms.setAttribute('class', 'game-platforms')
+    gamePlatforms.textContent = game.platforms.map(platform=>platform.platform.name).join(', ')
+    return gamePlatforms
+}
+
 export {
     getGameImageHTML,
     getGameTitleHTML,
     getGameRatingHTML,
-    getGameGenresHTML
+    getGameGenresHTML,
+    getGamePlatformsHTML
 }
