@@ -1,5 +1,5 @@
 
-let currentPage=0
+let currentPage=3
 let currentOrder='released'
 let currentFilter=''
 

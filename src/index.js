@@ -17,8 +17,7 @@ document.querySelector('.current-order-title').addEventListener('click', toggleS
 
 function toggleSidebar(){
     const sidebar = document.querySelector('.sidebar')
-   
-        sidebar.classList.toggle('hidden')
+    sidebar.classList.toggle('hidden')
 }
 
 async function redirect(e){
@@ -80,19 +79,27 @@ function addGames(){
 
 async function renderGames(params){
     const rawGamesList = await getGames(params)
-    const gamesList = rawGamesList.filter(game=>game.background_image!=null)
-    gamesList.forEach(game=>{
-            let block = document.createElement('article')
-            block.setAttribute('class', 'card')
-            block.setAttribute('data-id', game.id)
-            block.appendChild(getGameImageHTML(game))
-            block.appendChild(getGameRatingHTML(game)) 
-            block.appendChild(getGameTitleHTML(game))
-            block.appendChild(getGameGenresHTML(game))
-        
-            getSmallestColumn().appendChild(block)
-    })
-    stopLoading()
+    if(rawGamesList){
+        const gamesList = rawGamesList.filter(game=>game.background_image!=null)
+        gamesList.forEach(game=>{
+                let block = document.createElement('article')
+                block.setAttribute('class', 'card')
+                block.setAttribute('data-id', game.id)
+                block.appendChild(getGameImageHTML(game))
+                block.appendChild(getGameRatingHTML(game)) 
+                block.appendChild(getGameTitleHTML(game))
+                block.appendChild(getGameGenresHTML(game))
+            
+                getSmallestColumn().appendChild(block)
+        })
+        stopLoading()
+    
+        document.querySelectorAll('.card').forEach(card=>{
+            card.classList.add('card-transition')
+        })    
+    } else {
+        stopLoading()
+    }
 }
 
 setTitle()

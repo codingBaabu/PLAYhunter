@@ -88,9 +88,10 @@ h1 {
     font-size:4rem;
 }
 
-
-
-.card {
+.card-transition {
+    transition-property: border;
+    transition-duration:.4s;
+    transition-timing-function:linear;
     border:.5rem solid #222;
     position:relative;
     width:100%;
@@ -102,6 +103,7 @@ h1 {
 }
 
 .card:hover {
+    transition-property: none;
     cursor:pointer;
     background:#343434;
     border:.6rem solid #343434;
@@ -185,6 +187,10 @@ h1 {
     cursor: pointer;
 }
 
+.slide {
+    transform:translateX(0);
+}
+
 @media (min-width:1900px){
    body {
     max-width:120rem;
@@ -192,7 +198,6 @@ h1 {
     padding-top:0;
    }
 }
-
 
 @media (max-width:1100px){
     
@@ -281,6 +286,10 @@ h1 {
         z-index: 1;
         margin:0;
         padding:0;
+        transition-property:all;
+        transition-duration: .3s;
+        transition-timing-function:ease-out;
+        padding-bottom:3rem;
     }
 
     .sidebar-content {
@@ -288,7 +297,7 @@ h1 {
     }    
 
     .hidden {
-        display:none;
+        transform:translateX(-25rem);
     }
 
     .toggleSidebar {
@@ -300,10 +309,6 @@ h1 {
         height:2rem;
         background-color:#111;
         justify-content:flex-end;
-    }
-
-    .sidebar-content {
-
     }
 }
 
