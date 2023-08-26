@@ -1,0 +1,1 @@
+PLAYHunter is game discover app made using HTML, CSS, and Javascript for the frontend. A backend API proxy was made using Node.js and Express.js. This API serves as a proxy to hide an API key that is needed to call the RAWG API in order to retrieve game data.
