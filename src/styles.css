@@ -17,6 +17,8 @@ body {
 .play-hunter {
     text-decoration:none;
     color:white;
+    width:min-content;
+    font-size:1.2rem;
 }
 
 .play-hunter:hover {
@@ -44,6 +46,7 @@ li {
     width:100%;
     padding:2rem 0;
     font-size:4rem;
+    padding-top:0;
 }
 
 .order-dropdown {
@@ -55,7 +58,7 @@ li {
     border:none;
     border-right:1rem solid #333;
     border-radius:.4rem;
-    margin:1em;
+    margin:1.2em;
 }
 
 .order-dropdown:hover {
