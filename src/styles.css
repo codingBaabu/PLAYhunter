@@ -155,14 +155,14 @@ li {
 
 .game-title {
     padding:1rem;
-    padding-top:0;
+    padding-top:.5rem;
     padding-bottom:0;
     font-size:1.4rem;
 }
 
 .game-genres {
     padding:1rem;
-    padding-top:0;
+    padding-top:0rem;
     font-size:1rem;
     color:#aaa;
 }
