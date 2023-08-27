@@ -31,6 +31,7 @@ function removeQueries(e){
 }
 
 function orderSelected(e){
+    window.scrollTo(0, 0);
         setCurrentPage(1)
         setCurrentOrder(e.target.value)
         clearGames()
@@ -50,6 +51,7 @@ async function redirect(e){
 }
 
 function filterSelected(e, exception){
+    window.scrollTo(0, 0);
     const query = e.target.dataset.query    //returns a query stored in a created object in sidebar.js e.g. genres=action&filter=Action
     if(query || exception){
         let baseURL = window.location.origin + window.location.pathname
