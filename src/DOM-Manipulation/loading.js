@@ -10,7 +10,6 @@ function startLoading(){
     } else {
         document.getElementById('linear').style.visibility = 'visible'
         document.querySelector('.loading-more-content').style.display = 'flex'       
-        document.querySelector('.loading-more-content').style.padding = '5rem'       
     }
 }
 

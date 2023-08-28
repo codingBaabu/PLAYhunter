@@ -11,7 +11,7 @@ function getGameImageHTML(game){
 function getGameTitleHTML(game){
     let gameTitle = document.createElement('p')
     gameTitle.setAttribute('class', 'game-title')
-    gameTitle.textContent = game.name?game.name:''
+    gameTitle.textContent = game.name?game.name:'t'
     return gameTitle
 }
 

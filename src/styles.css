@@ -205,6 +205,12 @@ li {
     display:flex;
     justify-content: center;
     grid-column:2;
+    padding:2rem;
+}
+
+.more {
+    text-align:center;
+    font-size:2rem;
 }
 
 #linear {
@@ -213,6 +219,15 @@ li {
 
 #spinner {
     text-align:center;
+}
+
+.remove {
+    display:none;
+}
+
+.error {
+    font-size:1.2rem;
+    text-align: center;
 }
 
 @media (min-width:1900px){
@@ -312,6 +327,7 @@ li {
         transition-duration: .3s;
         transition-timing-function:ease-out;
         padding-bottom:3rem;
+        border-right:.1rem solid #bbb;
     }
 
     .sidebar-content {

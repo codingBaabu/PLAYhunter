@@ -20,7 +20,8 @@ document.querySelector('.current-order-title').addEventListener('click', toggleS
 
 //EventListener functions
 function addMoreGames(){
-    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight && getIsEmptyGames()==false){
+    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-1 && getIsEmptyGames()==false){
+        console.log('here')
         startLoading()    
         renderGames(getParams())
     }
@@ -95,7 +96,13 @@ function addGames(){
 
 async function renderGames(params){
     const rawGamesList = await getGames(params)
+    const errorClassList = document.querySelector('.error').classList
+
     if(rawGamesList){
+        if(!errorClassList.contains('remove')) { 
+            errorClassList.add('remove') 
+        }
+
         const gamesList = rawGamesList.filter(game=>game.background_image!=null)
         gamesList.forEach(game=>{
                 let block = document.createElement('article')
@@ -115,7 +122,11 @@ async function renderGames(params){
             card.classList.add('card-transition')
         })    
     } else {
+        console.log(rawGamesList)
         stopLoading()
+        if(errorClassList.contains('remove')) { 
+            errorClassList.remove('remove') 
+        }
     }
 }
 
