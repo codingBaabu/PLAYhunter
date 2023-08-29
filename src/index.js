@@ -122,7 +122,6 @@ async function renderGames(params){
             card.classList.add('card-transition')
         })    
     } else {
-        console.log(rawGamesList)
         stopLoading()
         if(errorClassList.contains('remove')) { 
             errorClassList.remove('remove') 
