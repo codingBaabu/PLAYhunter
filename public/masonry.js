@@ -17,10 +17,13 @@ function getSmallestColumn(){
     let smallestColumn = columns[0]
 
     columns.forEach(column=>{
-        if(column.offsetHeight < smallestColumn.offsetHeight){
+        if(column.offsetHeight <= smallestColumn.offsetHeight){
             smallestColumn = column           
         }
+
+        console.log(column + column.offsetHeight)
     })
+
 
     return smallestColumn
 }

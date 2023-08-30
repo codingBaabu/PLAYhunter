@@ -16,11 +16,15 @@ document.querySelector('.play-hunter').addEventListener('click', removeQueries)
 document.addEventListener('DOMContentLoaded', initColcade)
 document.querySelector('.games').addEventListener('click', redirect)
 document.querySelector('.sidebar').addEventListener('click', filterSelected)
-document.querySelector('.current-order-title').addEventListener('click', toggleSidebar)
+document.querySelector('.hamburger-wrapper').addEventListener('click', toggleSidebar)
+
+//variables 
+let addMoreGamesCalled = false
 
 //EventListener functions
 function addMoreGames(){
-    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-1 && getIsEmptyGames()==false){
+    if(window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-500 && getIsEmptyGames()==false && !addMoreGames){
+        addMoreGames=true
         console.log('here')
         startLoading()    
         renderGames(getParams())
@@ -60,6 +64,7 @@ function filterSelected(e, exception){
         let queries
         
         if(query){
+            toggleSidebar()
             filter = query.split('&')
             queries = { //breaks down aforementioned query into a format usable to add query to URL as multiple parameters
                 [filter[0].split('=')[0]]:filter[0].split('=')[1],
@@ -121,6 +126,8 @@ async function renderGames(params){
         document.querySelectorAll('.card').forEach(card=>{
             card.classList.add('card-transition')
         })    
+
+        addMoreGames=false
     } else {
         stopLoading()
         if(errorClassList.contains('remove')) { 

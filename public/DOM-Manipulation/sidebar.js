@@ -12,8 +12,8 @@ const content = [
     data:[
         { name:'PC', queries:'platforms=4'},
         { name:'PlayStation 5', queries:'platforms=187'},
-        { name:'Xbox Series S/X', queries:'platforms=186'},
-        { name:'Nintendo Switch', queries:'platforms=7'},
+        { name:'Xbox Series', queries:'platforms=186'},
+        { name:'Switch', queries:'platforms=7'},
         { name:'iOS', queries:'platforms=3'},
         { name:'Android', queries:'platforms=21'},
     ]}, 
