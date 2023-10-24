@@ -1,4 +1,4 @@
-# PLAYHunter 
+# PLAYhunter 
 This is a video game discover app that clones some features from https://rawg.io
 
 ## YOU SHOULD KNOW
