@@ -16,3 +16,6 @@ If you are cloning this repo, please ensure that you have already registered for
 - infinite scrolling 
 
 ## SCREENSHOTS
+
+### Homepage
+![App Screenshot](./public/images/homepage.png)
